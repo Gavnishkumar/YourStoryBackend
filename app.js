@@ -10,6 +10,6 @@ app.use(express.json());
 dotenv.config();
 connectDB();
 app.use('/api/user',UserRoute);
-app.listen(5000,(req,res)=>{
-    console.log("Server is running on 5000")
+app.listen(process.env.PORT,(req,res)=>{
+    console.log(  `Server is running on ${7000}`)
 })
