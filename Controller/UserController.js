@@ -55,7 +55,7 @@ const authUser = asyncHandler(async(req,res)=>{
     }
 });
 const FetchAllUser= asyncHandler(async(req,res)=>{
-    const AllUser= await User.find();
+    const AllUser= await User.find().select('-Password');
     if(AllUser){
         res.status(200).json(AllUser);
     }
