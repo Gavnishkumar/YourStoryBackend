@@ -11,6 +11,12 @@ const startUpSchema = mongoose.Schema({
   FounderName: { type: String, required: true },
   CompanyDes: { type: String, required: true, trim: true },
   FoundingYear: { type: Number, required: true },
+  Growth: [
+    {
+      Revenue: { type: Number, required: true },
+      Year: { type: Number, required: true },
+    },
+  ],
   NumberOfEmployees: { type: Number, required: true },
   TargetMarket: { type: String, required: true },
   CurrentStage: { type: String, required: true },
@@ -19,9 +25,11 @@ const startUpSchema = mongoose.Schema({
   Evaluation: { type: Number, required: true },
   Revenue: { type: Number, required: true },
   ContactInformation: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "ContactInfo",
+    CompanyEmail: { type: String, required: true, unique: true, trim: true },
+    Phone: { type: String, required: true },
+    LinkedInProfile: { type: String, required: true },
+    CompanyWebsite: { type: String, required: true },
+    OfficeAddress: { type: String, required: true, trim: true },
   },
 });
 
