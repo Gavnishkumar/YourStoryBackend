@@ -19,9 +19,11 @@ const profileSchema = mongoose.Schema({
   ],
   Image: { type: String, required: true },
   ContactInformation: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "ContactInfo",
+    CompanyEmail: { type: String, required: true, unique: true, trim: true },
+    Phone: { type: String, required: true },
+    LinkedInProfile: { type: String, required: true },
+    CompanyWebsite: { type: String, required: true },
+    OfficeAddress: { type: String, required: true, trim: true },
   },
   Experience: { type: String, required: true },
   StartUpDetails: {
