@@ -15,7 +15,6 @@ connectDB();
 app.use("/api/user", UserRoute);
 app.use("/api/profile", ProfileRoute);
 app.use("/api/post", PostRoute);
-
 app.listen(process.env.PORT, (req, res) => {
   console.log(`Server is running on ${7000}`);
 });

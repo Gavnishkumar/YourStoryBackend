@@ -20,7 +20,7 @@ const profileSchema = mongoose.Schema(
     ],
     Image: { type: String },
     ContactInformation: {
-      CompanyEmail: { type: String, unique: true, trim: true },
+      CompanyEmail: { type: String, trim: true },
       Phone: { type: String },
       LinkedInProfile: { type: String },
       CompanyWebsite: { type: String },
