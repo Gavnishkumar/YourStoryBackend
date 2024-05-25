@@ -8,29 +8,28 @@ const profileSchema = mongoose.Schema({
   },
   Name: { type: String, required: true },
   Email: { type: String, required: true, unique: true, trim: true },
-  Bio: { type: String, required: true, trim: true },
-  Role: { type: String, required: true },
+  Bio: { type: String,  trim: true },
+  Role: { type: String },
   TotalRevenue: [
     {
-      InverstedInCompanies: { type: Number, required: true },
-      InvestedMoney: { type: Number, required: true },
-      Date: { type: Date, required: true },
+      InverstedInCompanies: { type: Number },
+      InvestedMoney: { type: Number },
+      Date: { type: Date  },
     },
   ],
-  Image: { type: String, required: true },
+  Image: { type: String, },
   ContactInformation: {
-    CompanyEmail: { type: String, required: true, unique: true, trim: true },
-    Phone: { type: String, required: true },
-    LinkedInProfile: { type: String, required: true },
-    CompanyWebsite: { type: String, required: true },
-    OfficeAddress: { type: String, required: true, trim: true },
+    CompanyEmail: { type: String, unique: true, trim: true },
+    Phone: { type: String,  },
+    LinkedInProfile: { type: String, },
+    CompanyWebsite: { type: String, },
+    OfficeAddress: { type: String, trim: true },
   },
-  Experience: { type: String, required: true },
-  StartUpDetails: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "StartUp",
-  },
+  Experience: { type: String,  },
+  StartUpDetails: [],
+},{
+  timestamps: true,
 });
 
-exports.Profile = mongoose.model("Profile", profileSchema);
+const Profile = mongoose.model("Profile", profileSchema);
+module.exports = Profile;
