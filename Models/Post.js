@@ -1,25 +1,55 @@
 const mongoose = require("mongoose");
 
-const postSchema = mongoose.Schema({
-  User: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User",
-  },
-  Image: { type: String, required: true },
-  Title: { type: String, required: true },
-  Description: { type: String, required: true },
-  Likes: { type: Number, required: true, default: 0 },
-  Comments: [
-    {
-      User: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User",
-      },
-      Comment: { type: String, required: true },
+const commentSchema = mongoose.Schema(
+  {
+    User: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
-  ],
-});
+    Comment: {
+      type: String,
+      required: true,
+      maxlength: 500, // Example validation rule
+    },
+  },
+  {
+    timestamps: true, // Adds createdAt and updatedAt fields to the comments
+  }
+);
 
-exports.Post = mongoose.model("Post", postSchema);
+const postSchema = mongoose.Schema(
+  {
+    User: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+    Image: {
+      type: String,
+      required: true,
+    },
+    Title: {
+      type: String,
+      required: true,
+    },
+    Description: {
+      type: String,
+      required: true,
+      maxlength: 1000, // Example validation rule
+    },
+    Likes: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    Comments: [commentSchema],
+  },
+  {
+    timestamps: true, // Adds createdAt and updatedAt fields to the posts
+  }
+);
+
+const Post = mongoose.model("Post", postSchema);
+
+module.exports = Post;
