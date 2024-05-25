@@ -76,13 +76,12 @@ const authUser = asyncHandler(async(req,res)=>{
         return res.status(401).json({msg:"Invalid credentials."})
     }
 });
-const FetchAllUser= asyncHandler(async(req,res)=>{
-    const AllUser= await User.find().select('-Password');
-    if(AllUser){
-        res.status(200).json(AllUser);
-    }
-    else{
-        res.status(404).json({msg:"No user Found"})
-    }
-})
-module.exports={registerUser,authUser,FetchAllUser}
+const FetchAllUser = asyncHandler(async (req, res) => {
+  const AllUser = await User.find().select("-Password");
+  if (AllUser) {
+    res.status(200).json(AllUser);
+  } else {
+    res.status(404).json({ msg: "No user Found" });
+  }
+});
+module.exports = { registerUser, authUser, FetchAllUser };
