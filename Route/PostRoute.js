@@ -9,10 +9,10 @@ const {
   searchPost,
 } = require("../Controller/PostController");
 
-router.post("/createpost/:userId", createPost);
-router.put("/likes/:postId", updateLikes);
-router.put("/comment/:postId", addComment);
-router.get("/all", fetchAllPosts);
-router.get("/title", searchPost);
+router.post("/createpost/:userId", protect, createPost);
+router.put("/likes/:postId", protect, updateLikes);
+router.put("/comment/:postId", protect, addComment);
+router.get("/all", protect, fetchAllPosts);
+router.get("/title", protect, searchPost);
 
 module.exports = router;
