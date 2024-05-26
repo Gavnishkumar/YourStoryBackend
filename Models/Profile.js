@@ -27,7 +27,13 @@ const profileSchema = mongoose.Schema(
       OfficeAddress: { type: String, trim: true },
     },
     Experience: { type: String },
-    StartUpDetails: [],
+    StartUpDetails: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "StartUp",
+      },
+    ],
   },
   {
     timestamps: true,
