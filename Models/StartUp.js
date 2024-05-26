@@ -7,7 +7,7 @@ const startUpSchema = mongoose.Schema({
     ref: "User",
   },
 
-  Name: { type: String, required: true },
+  StartUpName: { type: String, required: true },
   Logo: { type: String, required: true },
   FounderName: { type: String, required: true },
   CompanyDes: { type: String, required: true, trim: true },
@@ -33,12 +33,13 @@ const startUpSchema = mongoose.Schema({
     },
   ],
   ContactInformation: {
-    CompanyEmail: { type: String, required: true, unique: true, trim: true },
-    Phone: { type: String, required: true },
-    LinkedInProfile: { type: String, required: true },
-    CompanyWebsite: { type: String, required: true },
-    OfficeAddress: { type: String, required: true, trim: true },
+    CompanyEmail: { type: String, trim: true },
+    Phone: { type: String },
+    LinkedInProfile: { type: String },
+    CompanyWebsite: { type: String },
+    OfficeAddress: { type: String, trim: true },
   },
 });
 
-exports.StartUp = mongoose.model("StartUp", startUpSchema);
+const StartUp = mongoose.model("StartUp", startUpSchema);
+module.exports = StartUp;
