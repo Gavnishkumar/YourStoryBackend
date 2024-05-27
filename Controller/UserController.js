@@ -43,6 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
         OfficeAddress: "",
       },
       Experience: "",
+      StartUpDetails: []
     });
   }
 

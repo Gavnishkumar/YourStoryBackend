@@ -11,7 +11,6 @@ const createPost = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
     const newPost = new Post({
       User: userId,
       Image,
@@ -94,7 +93,6 @@ const fetchAllPosts = async (req, res) => {
 // Search posts by title
 const searchPost = async (req, res) => {
   const { title } = req.query;
-
   try {
     const posts = await Post.find({ Title: { $regex: title, $options: "i" } })
       .populate("User", "username email")

@@ -15,6 +15,7 @@ const createStartUp = async (req, res) => {
 
     if (profile) {
       // Update the Profile with the new startup ID
+      console.log(profile);
       profile.StartUpDetails.push(startUp._id);
       await profile.save();
       console.log(`Profile updated with new startup ID: ${startUp._id}`);
