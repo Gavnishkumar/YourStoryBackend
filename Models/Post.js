@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Profile = require("./Profile");
 
 const commentSchema = mongoose.Schema(
   {
@@ -23,11 +24,11 @@ const postSchema = mongoose.Schema(
     User: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: "Profile",
     },
     Image: {
       type: String,
-      required: true,
+      default:""
     },
     Title: {
       type: String,
@@ -38,10 +39,14 @@ const postSchema = mongoose.Schema(
       required: true,
       maxlength: 1000, // Example validation rule
     },
-    Likes: {
-      type: Number,
+    LikedBy: [{
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
-      default: 0,
+      ref: "Profile",
+    }],
+    Likes: {
+      type:Number,
+      default: 0
     },
     Comments: [commentSchema],
   },

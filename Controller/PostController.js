@@ -1,18 +1,19 @@
 const Post = require("../Models/Post");
+const Profile = require("../Models/Profile");
 const User = require("../Models/User");
 
 // Create a new post
 const createPost = async (req, res) => {
-  const userId = req.params.userId;
+  const profileId = req.params.profileId;
   const { Image, Title, Description } = req.body;
-
   try {
-    const user = await User.findById(userId);
+    console.log(profileId)
+    const user = await Profile.findById(profileId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     const newPost = new Post({
-      User: userId,
+      User: profileId,
       Image,
       Title,
       Description,
@@ -29,22 +30,25 @@ const createPost = async (req, res) => {
 // Update likes on a post
 const updateLikes = async (req, res) => {
   const postId = req.params.postId;
-
+  const userId = req.body.UserId; // Corrected to userId
   try {
     const post = await Post.findById(postId);
-
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
+    if (post.LikedBy.includes(userId)){
+      return res.status(400).json({ message: "User has already liked this post" });
+    }
+    post.LikedBy.push(userId);
     post.Likes += 1;
     await post.save();
-
     res.status(200).json({ message: "Post liked successfully", likes: post.Likes });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
 
 // Add a comment to a post
 const addComment = async (req, res) => {
@@ -58,7 +62,6 @@ const addComment = async (req, res) => {
     }
 
     const post = await Post.findById(postId);
-
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -82,9 +85,10 @@ const addComment = async (req, res) => {
 const fetchAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate("User", "username email")
+      .populate("User", "Name Image Bio")
       .populate("Comments.User", "username email");
-    res.status(200).json(posts);
+     
+      res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -95,8 +99,9 @@ const searchPost = async (req, res) => {
   const { title } = req.query;
   try {
     const posts = await Post.find({ Title: { $regex: title, $options: "i" } })
-      .populate("User", "username email")
+      .populate("User", "Name Email Image")
       .populate("Comments.User", "username email");
+    
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });

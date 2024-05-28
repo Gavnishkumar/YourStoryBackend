@@ -9,7 +9,7 @@ const {
   searchPost,
 } = require("../Controller/PostController");
 
-router.post("/createpost/:userId", protect, createPost);
+router.post("/createpost/:profileId", protect, createPost);
 router.put("/likes/:postId", protect, updateLikes);
 router.put("/comment/:postId", protect, addComment);
 router.get("/all", protect, fetchAllPosts);
