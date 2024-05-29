@@ -32,8 +32,10 @@ const protect = asyncHandler(async (req, res, next) => {
 
 const authorizeUser = asyncHandler((req, res, next) => {
   try {
-    const { userId } = req.body;
-    if (userId !== req.user.id) {
+    const { User } = req.body;
+    console.log(req.user)
+    console.log(User)
+    if (User !== req.user.id) {
       return res.status(403).json({ message: "Not authorized to access this route" });
     }
     next();
