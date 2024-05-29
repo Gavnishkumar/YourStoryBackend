@@ -8,7 +8,9 @@ const createPost = async (req, res) => {
   const { Image, Title, Description } = req.body;
   try {
     console.log(profileId)
-    const user = await Profile.findById(profileId).populate("User","Name Email Image");
+    const user = await Profile.findById(profileId)
+  .select("Name Email Image")
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
