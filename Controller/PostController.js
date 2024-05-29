@@ -9,7 +9,7 @@ const createPost = async (req, res) => {
   try {
     console.log(profileId)
     const user = await Profile.findById(profileId)
-  .select("Name Email Image")
+  .select("Name Email Image Bio")
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
