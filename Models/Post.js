@@ -11,7 +11,7 @@ const commentSchema = mongoose.Schema(
     Comment: {
       type: String,
       required: true,
-      maxlength: 500, // Example validation rule
+      maAxlength: 500, // Example validation rule
     },
   },
   {

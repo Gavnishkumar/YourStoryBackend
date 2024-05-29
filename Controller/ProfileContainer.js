@@ -13,7 +13,7 @@ const FetchProfileDetail =(asyncHandler(async(req,res)=>{
 }))
 const UpdateProfileDetail = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const updateData = req.body; // Assuming the updated data is sent in the request body
+    const updateData = req.body; 
 
     try {
         const profile = await Profile.findOne({User:id});
