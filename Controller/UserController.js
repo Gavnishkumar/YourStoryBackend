@@ -58,7 +58,6 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(401).json({ msg: "failed to create user." });
   }
 });
-
 const authUser = asyncHandler(async (req, res) => {
   const { Email, Password } = req.body;
   const user = await User.findOne({ Email });
