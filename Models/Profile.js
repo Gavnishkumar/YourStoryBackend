@@ -39,6 +39,5 @@ const profileSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
 const Profile = mongoose.model("Profile", profileSchema);
 module.exports = Profile;
