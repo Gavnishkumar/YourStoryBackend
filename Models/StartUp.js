@@ -6,8 +6,7 @@ const startUpSchema = mongoose.Schema({
     required: true,
     ref: "User",
   },
-
-  StartUpName: { type: String, required: true },
+  StartUpName: { type: String, required: true},
   Logo: { type: String, required: true },
   FounderName: { type: String, required: true },
   CompanyDes: { type: String, required: true, trim: true },
