@@ -6,7 +6,7 @@ const startUpSchema = mongoose.Schema({
     required: true,
     ref: "User",
   },
-  StartUpName: { type: String, required: true},
+  StartUpName: { type: String, required: true },
   Logo: { type: String, required: true },
   FounderName: { type: String, required: true },
   CompanyDes: { type: String, required: true, trim: true },
@@ -21,7 +21,7 @@ const startUpSchema = mongoose.Schema({
   TargetMarket: { type: String, required: true },
   CurrentStage: { type: String, required: true },
   KeyFeatures: { type: String, required: true },
-  Inverstors: { type: String, required: true },
+  Investors: { type: String, required: true },
   Evaluation: { type: Number, required: true },
   Revenue: { type: Number, required: true },
   FundingRaised: [
