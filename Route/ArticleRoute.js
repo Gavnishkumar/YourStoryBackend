@@ -2,7 +2,7 @@ const express = require("express");
 const { protect } = require("../middleware/authmiddleware");
 const { createArticle, updateArticle, searchArticles, fetchArticle, deleteArticle, fetchAllArticles } = require("../Controller/ArticleController");
 const router = express.Router();
-router.post('/articles/:authorId', createArticle);
+router.post('/create/:authorId', createArticle);
 router.put('/articles/:articleId', updateArticle);
 router.get('/articles/search', searchArticles);
 router.get('/articles/:articleId', fetchArticle);
