@@ -146,10 +146,31 @@ const fetchEventByName = async (req, res) => {
   }
 };
 
+// Fetch a single event by ID
+const fetchEventById = async (req, res) => {
+  const eventId = req.params.id;
+
+  try {
+    const event = await Event.findById(eventId).populate("Attendees", "Name Email");
+
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, event: event, message: "Event fetched successfully" });
+  } catch (error) {
+    console.error("Error fetching event:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
   fetchAllEvents,
   fetchEventByName,
+  fetchEventById,
 };
