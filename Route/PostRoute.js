@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   createPost,
   updateLikes,
+  deletePost,
   addComment,
   fetchAllPosts,
   searchPost,
@@ -13,6 +14,7 @@ const {
 
 router.post("/createpost/:profileId", protect, createPost);
 router.put("/updatepost/:postId", protect, updatePost);
+router.delete("/deletepost/:postId",protect, deletePost);
 router.put("/likes/:postId", protect, updateLikes);
 router.put("/comment/:postId", protect, addComment);
 router.get("/all", protect, fetchAllPosts);
