@@ -56,8 +56,6 @@ const AddMentors = async (req, res) => {
       res.status(500).send(error.message);
     }
   }
-
-
   const RemoveMentors=asyncHandler(async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.userId);
@@ -91,18 +89,15 @@ const AddMentors = async (req, res) => {
     }
   });
 // user matching profile algorithm
-
-const MatchProfile=asyncHandler(
-async(req,res)=>{
+const MatchProfile = asyncHandler(async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const matchedProfiles = await matchProfiles(userId);
-    
-        res.status(200).send(matchedProfiles);
-      } catch (err) {
-        res.status(500).send({ error: "Internal server error" });
-      }
-}
-)
+      const userId = req.params.userId;
+      const matchedProfiles = await matchProfiles(userId);
+  
+      res.status(200).send(matchedProfiles);
+    } catch (err) {
+      res.status(500).send({ error: "Internal server error" });
+    }
+  });
 
 module.exports={FetchProfileDetail,UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors}
