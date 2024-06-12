@@ -56,14 +56,12 @@ const deleteStartUp = async (req, res) => {
     if (!startUp) {
       return res.status(404).json({ message: "Startup not found" });
     }
-
     // Update the Profile to remove the startup ID
     const updatedProfile = await Profile.findOneAndUpdate(
       { User: startUp.User },
       { $pull: { StartUpDetails: startUp._id } },
       { new: true }
     );
-
     if (!updatedProfile) {
       return res.status(404).json({ message: "Profile not found for the user" });
     }

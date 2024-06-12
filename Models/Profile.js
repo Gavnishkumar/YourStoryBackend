@@ -27,6 +27,12 @@ const profileSchema = mongoose.Schema(
       OfficeAddress: { type: String, trim: true },
     },
     Experience: { type: String },
+    MyMentors:[
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profile'
+      }
+    ],
     StartUpDetails: [
       {
         type: mongoose.Schema.Types.ObjectId,
