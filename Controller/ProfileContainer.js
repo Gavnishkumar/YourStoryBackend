@@ -127,4 +127,4 @@ const MatchProfile = asyncHandler(async (req, res) => {
   });
 
 
-module.exports={FetchProfileDetail, FetchProfileDetailsById, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors}
+module.exports={FetchProfileDetail, FetchProfileDetailsById, SearchProfile, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors}
