@@ -13,8 +13,9 @@ const FetchProfileDetail =(asyncHandler(async(req,res)=>{
 }))
 
 const FetchProfileDetailsById = asyncHandler(async (req, res) => {
-  const email = req.query.email; // or req.query.email if you're passing the email as a query parameter
-  const profile = await Profile.findOne(email );
+
+  const id = req.params.id; 
+  const profile = await Profile.findOne({_id: id});
   if (profile) {
     res.status(200).json(profile);
   } else {
@@ -127,3 +128,4 @@ const MatchProfile = asyncHandler(async (req, res) => {
   });
 
 module.exports={FetchProfileDetail, FetchProfileDetailsById, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
+

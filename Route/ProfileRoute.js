@@ -6,6 +6,7 @@ const {
   UpdateProfileDetail,
   MatchProfile,
   AddMentors,
+  
   RemoveMentors,
   MyAllMentors,
   SearchProfile,
@@ -13,9 +14,10 @@ const {
 
 const router = express.Router();
 router.route("/update/:id").put(UpdateProfileDetail);
+
 router.route("/search").post(SearchProfile);
 router.route("/:id").get(protect, FetchProfileDetail);
-router.route("/profileid/:profileId").get(FetchProfileDetailsById);
+router.route("/profileId/:id").get(FetchProfileDetailsById);
 router.route("/suggestion/:userId").get(MatchProfile);
 router.route("/add-mentors/:userId").post(AddMentors);
 router.route("/remove-mentor/:userId").delete(RemoveMentors);
