@@ -42,7 +42,7 @@ const UpdateProfileDetail = asyncHandler(async (req, res) => {
     }
 });
 const SearchProfile=(asyncHandler(async (req, res) => {
-  const searchText = req.body.searchText;
+  const searchText = req.query.searchText;
   try {
       const profiles = await Profile.find({
           $or: [
