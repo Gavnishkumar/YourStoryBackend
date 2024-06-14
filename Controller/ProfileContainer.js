@@ -41,7 +41,24 @@ const UpdateProfileDetail = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+const SearchProfile=(asyncHandler(async (req, res) => {
+  const { searchText } = req.body;
+  try {
+      const profiles = await Profile.find({
+          $or: [
+              { Name: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Name
+              { Email: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Email
+              { Role: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Role
+              { Bio: { $regex: searchText, $options: 'i' } } // Case-insensitive search for Bio
+          ]
+      });
 
+      res.json(profiles);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+}));
 const AddMentors = async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.userId);
@@ -73,12 +90,10 @@ const AddMentors = async (req, res) => {
       if (!profile) {
         return res.status(404).send('Profile not found');
       }
-  
       profile.MyMentors.pull(req.body.mentorId);
       await profile.save();
-  
       res.status(200).send(profile);
-    } catch (error) {
+    } catch (error){
       res.status(500).send(error.message);
     }
   });
@@ -110,5 +125,6 @@ const MatchProfile = asyncHandler(async (req, res) => {
       res.status(500).send({ error: "Internal server error" });
     }
   });
+
 
 module.exports={FetchProfileDetail, FetchProfileDetailsById, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors}

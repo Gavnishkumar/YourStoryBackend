@@ -8,11 +8,14 @@ const {
   AddMentors,
   RemoveMentors,
   MyAllMentors,
+  SearchProfile,
 } = require("../Controller/ProfileContainer");
+
 const router = express.Router();
 router.route("/update/:id").put(UpdateProfileDetail);
 router.route("/:id").get(FetchProfileDetail);
 router.route("/profileId/:id").get(FetchProfileDetailsById);
+router.route("/search").post(SearchProfile);
 router.route("/suggestion/:userId").get(MatchProfile);
 router.route("/add-mentors/:userId").post(AddMentors);
 router.route("/remove-mentor/:userId").delete(RemoveMentors);
