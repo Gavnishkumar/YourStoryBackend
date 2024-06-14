@@ -56,8 +56,8 @@ const SearchProfile=(asyncHandler(async (req, res) => {
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
+    }
   }
-}
 ))
 const AddMentors = async (req, res) => {
     try {
