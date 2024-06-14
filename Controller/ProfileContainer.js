@@ -11,6 +11,17 @@ const FetchProfileDetail =(asyncHandler(async(req,res)=>{
         res.status(404).json({msg:"No user data Found"})
     }
 }))
+
+const FetchProfileDetailsByEmail = asyncHandler(async (req, res) => {
+  const email = req.query.email; // or req.query.email if you're passing the email as a query parameter
+  const profile = await Profile.findOne(email );
+  if (profile) {
+    res.status(200).json(profile);
+  } else {
+    res.status(404).json({ message: 'Profile not found' });
+  }
+});
+
 const UpdateProfileDetail = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const updateData = req.body; 
@@ -118,4 +129,4 @@ const MatchProfile = asyncHandler(async (req, res) => {
     }
   });
 
-module.exports={FetchProfileDetail,UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
+module.exports={FetchProfileDetail, FetchProfileDetailsByEmail, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
