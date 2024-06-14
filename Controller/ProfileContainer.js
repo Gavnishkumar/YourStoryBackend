@@ -30,7 +30,27 @@ const UpdateProfileDetail = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+const SearchProfile=(asyncHandler(async (req, res) => {
+  console.log("chl rha hai")
+  // const searchText = req.body.searchText;
+  // console.log(searchText)
+  // try {
+  //     const profiles = await Profile.find({
+  //         $or: [
+  //             { Name: { $regex: searchText, $options: 'i' } }, 
+  //             { Email: { $regex: searchText, $options: 'i' } }, 
+  //             { Role: { $regex: searchText, $options: 'i' } }, 
+  //             { Bio: { $regex: searchText, $options: 'i' } },
+  //         ]
+  //     });
 
+//       res.json(profiles);
+//   } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Server Error');
+//   }
+}
+))
 const AddMentors = async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.userId);
@@ -62,12 +82,10 @@ const AddMentors = async (req, res) => {
       if (!profile) {
         return res.status(404).send('Profile not found');
       }
-  
       profile.MyMentors.pull(req.body.mentorId);
       await profile.save();
-  
       res.status(200).send(profile);
-    } catch (error) {
+    } catch (error){
       res.status(500).send(error.message);
     }
   });
@@ -100,4 +118,4 @@ const MatchProfile = asyncHandler(async (req, res) => {
     }
   });
 
-module.exports={FetchProfileDetail,UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors}
+module.exports={FetchProfileDetail,UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
