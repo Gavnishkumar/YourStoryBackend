@@ -42,24 +42,21 @@ const UpdateProfileDetail = asyncHandler(async (req, res) => {
     }
 });
 const SearchProfile=(asyncHandler(async (req, res) => {
-  console.log("chl rha hai")
-  // const searchText = req.body.searchText;
-  // console.log(searchText)
-  // try {
-  //     const profiles = await Profile.find({
-  //         $or: [
-  //             { Name: { $regex: searchText, $options: 'i' } }, 
-  //             { Email: { $regex: searchText, $options: 'i' } }, 
-  //             { Role: { $regex: searchText, $options: 'i' } }, 
-  //             { Bio: { $regex: searchText, $options: 'i' } },
-  //         ]
-  //     });
-
-//       res.json(profiles);
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Server Error');
-//   }
+  const searchText = req.body.searchText;
+  try {
+      const profiles = await Profile.find({
+          $or: [
+              { Name: { $regex: searchText, $options: 'i' } }, 
+              { Email: { $regex: searchText, $options: 'i' } }, 
+              { Role: { $regex: searchText, $options: 'i' } }, 
+              { Bio: { $regex: searchText, $options: 'i' } },
+          ]
+      });
+      res.json(profiles);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
 }
 ))
 const AddMentors = async (req, res) => {
