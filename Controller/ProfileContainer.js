@@ -42,23 +42,23 @@ const UpdateProfileDetail = asyncHandler(async (req, res) => {
     }
 });
 const SearchProfile=(asyncHandler(async (req, res) => {
-  const searchText = req.query.searchText;
+  const { searchText } = req.body;
   try {
       const profiles = await Profile.find({
           $or: [
-              { Name: { $regex: searchText, $options: 'i' } }, 
-              { Email: { $regex: searchText, $options: 'i' } }, 
-              { Role: { $regex: searchText, $options: 'i' } }, 
-              { Bio: { $regex: searchText, $options: 'i' } },
+              { Name: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Name
+              { Email: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Email
+              { Role: { $regex: searchText, $options: 'i' } }, // Case-insensitive search for Role
+              { Bio: { $regex: searchText, $options: 'i' } } // Case-insensitive search for Bio
           ]
       });
+
       res.json(profiles);
   } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
-    }
   }
-))
+}));
 const AddMentors = async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.userId);
