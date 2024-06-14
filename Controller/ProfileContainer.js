@@ -12,7 +12,7 @@ const FetchProfileDetail =(asyncHandler(async(req,res)=>{
     }
 }))
 
-const FetchProfileDetailsByEmail = asyncHandler(async (req, res) => {
+const FetchProfileDetailsById = asyncHandler(async (req, res) => {
   const email = req.query.email; // or req.query.email if you're passing the email as a query parameter
   const profile = await Profile.findOne(email );
   if (profile) {
@@ -126,4 +126,4 @@ const MatchProfile = asyncHandler(async (req, res) => {
     }
   });
 
-module.exports={FetchProfileDetail, FetchProfileDetailsByEmail, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
+module.exports={FetchProfileDetail, FetchProfileDetailsById, UpdateProfileDetail,MatchProfile, AddMentors, RemoveMentors,MyAllMentors,SearchProfile}
