@@ -158,7 +158,7 @@ const fetchAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .populate("User", "Name Image Bio")
-      .populate("Comments.User", "Name Email");
+      .populate("Comments.User", "Name Image Bio Email");
      
       res.status(200).json(posts);
   } catch (error) {
