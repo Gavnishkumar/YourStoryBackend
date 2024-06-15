@@ -6,7 +6,7 @@ const commentSchema = mongoose.Schema(
     User: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: "Profile",
     },
     Comment: {
       type: String,
@@ -51,7 +51,7 @@ const postSchema = mongoose.Schema(
     Comments: [commentSchema],
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields to the posts
+    timestamps: true, 
   }
 );
 

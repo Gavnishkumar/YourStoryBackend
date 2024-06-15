@@ -70,7 +70,7 @@ const deletePost = async (req, res) => {
 // Update likes on a post
 const updateLikes = async (req, res) => {
   const postId = req.params.postId;
-  const userId = req.body.UserId; // Corrected to userId
+  const userId = req.body.UserId;
   try {
     const post = await Post.findById(postId);
     if (!post) {
@@ -96,7 +96,7 @@ const addComment = async (req, res) => {
   const { userId, comment } = req.body;
 
   try {
-    const user = await User.findById(userId);
+    const user = await Profile.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -120,7 +120,39 @@ const addComment = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+const fetchComments = async (req, res) => {
+  const postId = req.params.postId;
 
+  try {
+    const post = await Post.findById(postId).populate({
+      path: 'Comments.User',
+      select: 'Name Email Image Bio'
+    });
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.status(200).json({ comments: post.Comments });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+// Fetch all likes for a post
+const fetchLikes = async (req, res) => {
+  const postId = req.params.postId;
+
+  try {
+    const post = await Post.findById(postId).populate({path:"LikedBy", select:"Name Image Email Bio"})
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.status(200).json({ likes: post.Likes, likedBy: post.LikedBy });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
 // Fetch all posts
 const fetchAllPosts = async (req, res) => {
   try {
@@ -156,4 +188,6 @@ module.exports = {
   addComment,
   fetchAllPosts,
   searchPost,
+  fetchLikes,
+  fetchComments
 };
