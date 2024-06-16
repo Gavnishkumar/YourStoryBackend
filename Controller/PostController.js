@@ -114,10 +114,12 @@ const addComment = async (req, res) => {
     });
 
     await post.save();
-
+    const respnose = await Post.findById(postId)
+      .populate("User", "Name Image Bio")
+      .populate("Comments.User", "Name Image Bio Email");
     res
       .status(200)
-      .json({ message: "Comment added successfully", comments: post.Comments });
+      .json({ message: "Comment added successfully", comments: respnose.Comments });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
