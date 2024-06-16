@@ -101,7 +101,9 @@ const addComment = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId)
+      .populate("User", "Name Image Bio")
+      .populate("Comments.User", "Name Image Bio Email");
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
