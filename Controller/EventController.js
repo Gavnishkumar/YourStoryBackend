@@ -74,7 +74,6 @@ const createEvent = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
-
 // Update the Event by ID
 const updateEvent = async (req, res) => {
   const eventId = req.params.id;
@@ -95,7 +94,6 @@ const updateEvent = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
 // Delete the Event by ID
 const deleteEvent = async (req, res) => {
   const eventId = req.params.id;
@@ -113,7 +111,6 @@ const deleteEvent = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
 // Fetch all Events
 const fetchAllEvents = async (req, res) => {
   try {
@@ -127,7 +124,6 @@ const fetchAllEvents = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
 // Fetch Event by Name
 const fetchEventByName = async (req, res) => {
   const eventName = req.params.name;
